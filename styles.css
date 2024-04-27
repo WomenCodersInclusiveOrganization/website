@@ -1,0 +1,49 @@
+.navbar-brand {
+  margin-left: 5rem;
+  font-family: 'Jersey 15', sans-serif;
+  font-size: 2rem !important;
+  color: white !important;
+  white-space: normal !important;
+}
+
+@media (max-width: 576px) {
+  .navbar-brand {
+    margin: auto;
+    width: 100%; /* Ensure full width on smaller screens */
+    text-align: center; /* Center align text on smaller screens */
+  }
+}
+.navbar {
+  background: linear-gradient(to right, rgb(48, 60, 219), rgb(94, 114, 226));
+}
+
+.navbar-nav .nav-link {
+  color: white !important;
+}
+
+.ms-auto {
+  padding-right: 5rem;
+}
+
+#welcome-message {
+  margin: 5rem;
+}
+
+#right-column {
+  margin: 5rem 2rem 0 2rem;
+  text-align: center;
+}
+
+#right-column button {
+  display: block;
+  width: 80%;
+  max-width: 20rem;
+  height: 3.5rem;
+  margin: 2rem auto;
+}
+
+#upcoming-meetups {
+  border: 2px solid #666666;
+  border-radius: 10px;
+  padding: 20px;
+}
