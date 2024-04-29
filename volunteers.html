@@ -146,8 +146,8 @@
 
       async function fetchVolunteerTiles() {
         const volunteerTiles = [];
-        const response = await fetch('/volunteers/');
-        console.log(response.text);
+        const response = await fetch('../volunteers/');
+        // console.log(response);
         const html = await response.text();
         const folderNames = extractFolderNames(html);
 
@@ -172,7 +172,7 @@
             href.startsWith('/volunteers/') &&
             href !== '/volunteers/'
           ) {
-            const folderName = href.replace('./volunteers/', '');
+            const folderName = href.replace('../volunteers/', '');
             folderNames.push(folderName);
           }
         });
