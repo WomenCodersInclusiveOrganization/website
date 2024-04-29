@@ -149,7 +149,7 @@
       // Function to fetch network tiles from index.html files in networks folder
       async function fetchNetworkTiles() {
         const networkTiles = [];
-        const response = await fetch('./networks/');
+        const response = await fetch('https://womencoders.tech/networks/');
         // console.log(response);
 
         const html = await response.text();
@@ -182,7 +182,10 @@
           // Check if the link represents a directory inside the 'networks' folder
           if (href && href.startsWith('/networks/') && href !== '/networks/') {
             // Extract the folder name by removing './networks/' from the href
-            const folderName = href.replace('./networks/', '');
+            const folderName = href.replace(
+              'https://womencoders.tech/networks/',
+              ''
+            );
             // Push the folder name to the array
             folderNames.push(folderName);
           }
