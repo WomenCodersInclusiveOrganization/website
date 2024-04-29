@@ -111,6 +111,61 @@ body {
   font-family: monospace, sans-serif;
 }
 
+/* Network Tiles */
+
+.network-tile {
+  margin-bottom: 20px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  max-width: 100%; /* Ensure image doesn't exceed parent width */
+  max-height: 150px; /* Set maximum height for the image */
+  display: block; /* Ensure image doesn't affect vertical alignment */
+  margin: 2rem auto; /* Center the image horizontally */
+}
+
+.card-body {
+  padding: 20px;
+  text-align: center; /* Center the text */
+}
+
+.card-title {
+  margin-bottom: 0;
+}
+
+.links {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center; /* Center the icons */
+}
+
+.link {
+  margin-right: 10px;
+  color: #333;
+  text-decoration: none;
+}
+
+.link i {
+  font-size: 24px; /* Larger icon size */
+}
+
+.link:hover {
+  color: #007bff;
+}
+
 /* Footer */
 
 #social-media-links ul {
