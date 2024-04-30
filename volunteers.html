@@ -131,52 +131,29 @@
       </div>
     </div>
   </footer>
-  <script>
+  <script type="module">
+    import folderNames from './volunteers_config.js';
+
     document.addEventListener('DOMContentLoaded', function () {
       function insertVolunteerTiles() {
         const volunteerTilesContainer =
           document.getElementById('volunteer-tiles');
-
         fetchVolunteerTiles().then((volunteerTiles) => {
           volunteerTiles.forEach((tile) => {
             volunteerTilesContainer.innerHTML += tile;
           });
         });
       }
-
       async function fetchVolunteerTiles() {
         const volunteerTiles = [];
-        const response = await fetch('../volunteers/');
-        // console.log(response);
-        const html = await response.text();
-        const folderNames = extractFolderNames(html);
-
         for (const folderName of folderNames) {
-          const indexHtmlResponse = await fetch(`${folderName}/index.html`);
+          const indexHtmlResponse = await fetch(
+            `/volunteers/${folderName}/index.html`
+          );
           const indexHtml = await indexHtmlResponse.text();
           volunteerTiles.push(indexHtml);
         }
         return volunteerTiles;
-      }
-
-      function extractFolderNames(html) {
-        const folderNames = [];
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-        const links = doc.querySelectorAll('a');
-
-        links.forEach((link) => {
-          const href = link.getAttribute('href');
-          if (
-            href &&
-            href.startsWith('/volunteers/') &&
-            href !== '/volunteers/'
-          ) {
-            const folderName = href.replace('../volunteers/', '');
-            folderNames.push(folderName);
-          }
-        });
-        return folderNames;
       }
       insertVolunteerTiles();
     });

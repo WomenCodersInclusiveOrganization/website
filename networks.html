@@ -132,66 +132,29 @@
       </div>
     </div>
   </footer>
-  <script>
+  <script type="module">
+    import folderNames from './networks_config.js';
+
     document.addEventListener('DOMContentLoaded', function () {
-      // Function to fetch and insert network tiles
       function insertNetworkTiles() {
         const networkTilesContainer = document.getElementById('network-tiles');
-
-        // Fetch network tiles from networks folder
         fetchNetworkTiles().then((networkTiles) => {
           networkTiles.forEach((tile) => {
             networkTilesContainer.innerHTML += tile;
           });
         });
       }
-
-      // Function to fetch network tiles from index.html files in networks folder
       async function fetchNetworkTiles() {
         const networkTiles = [];
-        const response = await fetch('../networks/');
-        // console.log(response);
-
-        const html = await response.text();
-
-        // Extract folder names from the HTML directory listing
-        const folderNames = extractFolderNames(html);
-        console.log(folderNames);
-
-        // Fetch content of each index.html file
         for (const folderName of folderNames) {
-          const indexHtmlResponse = await fetch(`${folderName}/index.html`);
+          const indexHtmlResponse = await fetch(
+            `/networks/${folderName}/index.html`
+          );
           const indexHtml = await indexHtmlResponse.text();
           networkTiles.push(indexHtml);
         }
-
         return networkTiles;
       }
-
-      // Function to extract folder names from HTML directory listing
-      function extractFolderNames(html) {
-        const folderNames = [];
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-        const links = doc.querySelectorAll('a');
-
-        links.forEach((link) => {
-          const href = link.getAttribute('href');
-          console.log(href);
-
-          // Check if the link represents a directory inside the 'networks' folder
-          if (href && href.startsWith('/networks/') && href !== '/networks/') {
-            // Extract the folder name by removing './networks/' from the href
-            const folderName = href.replace('../networks/', '');
-            // Push the folder name to the array
-            folderNames.push(folderName);
-          }
-        });
-
-        return folderNames;
-      }
-
-      // Insert network tiles when the page loads
       insertNetworkTiles();
     });
   </script>
