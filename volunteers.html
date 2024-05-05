@@ -131,33 +131,95 @@
       </div>
     </div>
   </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+
   <script type="module">
     import folderNames from './volunteers_config.js';
 
     document.addEventListener('DOMContentLoaded', function () {
-      function insertVolunteerTiles() {
-        const volunteerTilesContainer =
-          document.getElementById('volunteer-tiles');
-        fetchVolunteerTiles().then((volunteerTiles) => {
-          volunteerTiles.forEach((tile) => {
-            volunteerTilesContainer.innerHTML += tile;
-          });
-        });
-      }
       async function fetchVolunteerTiles() {
         const volunteerTiles = [];
         for (const folderName of folderNames) {
-          const indexHtmlResponse = await fetch(
-            `/volunteers/${folderName}/index.html`
+          const yamlResponse = await fetch(
+            `/volunteers/${folderName}/config.yaml`
           );
-          const indexHtml = await indexHtmlResponse.text();
-          volunteerTiles.push(indexHtml);
+          const yamlData = await yamlResponse.text();
+          const volunteerData = jsyaml.load(yamlData);
+          volunteerData.forEach((tile) => {
+            tile.folderName = folderName;
+          });
+          volunteerTiles.push(...volunteerData);
         }
         return volunteerTiles;
       }
+
+      function createVolunteerTiles(volunteerData) {
+        let tilesHTML = '';
+        volunteerData.forEach((volunteer) => {
+          const { name, city, country_code, links, folderName } = volunteer;
+          const logoSrc =
+            links && links.logo
+              ? `./volunteers/${folderName}/${links.logo}`
+              : 'https://www.svgrepo.com/show/508699/landscape-placeholder.svg';
+
+          const tileHTML = `
+            <div class="volunteer-tile col-md-6">
+              <div class="volunteer-card">
+                <img src="${logoSrc}" class="volunteer-card-img" alt="${name} Logo"/>
+                <div class="volunteer-card-body">
+                  <h5 class="volunteer-card-title">${name}</h5>
+                  <p>${city}, ${country_code}</p>
+                  <div class="links">
+                    ${generateLinks(links)}
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+          tilesHTML += tileHTML;
+        });
+        return tilesHTML;
+      }
+
+      async function insertVolunteerTiles() {
+        const volunteerTilesContainer =
+          document.getElementById('volunteer-tiles');
+        const volunteerTiles = await fetchVolunteerTiles();
+        const tilesHTML = createVolunteerTiles(volunteerTiles);
+        volunteerTilesContainer.innerHTML = tilesHTML;
+      }
+
+      function generateLinks(links) {
+        let linksHTML = '';
+        if (links && typeof links === 'object') {
+          for (const [key, value] of Object.entries(links)) {
+            if (value && value.trim() !== '' && key !== 'logo') {
+              const iconClass = getIconClass(key);
+              linksHTML += `
+                <a href="${value}" target="_blank" class="link">
+                  <i class="${iconClass}" style="color: #008dda"></i>
+                </a>
+              `;
+            }
+          }
+        }
+        return linksHTML;
+      }
+
+      function getIconClass(key) {
+        const iconClasses = {
+          website: 'fa-solid fa-earth-americas',
+          linkedin: 'fa-brands fa-linkedin',
+          instagram: 'fa-brands fa-instagram',
+          github: 'fa-brands fa-github',
+        };
+        return iconClasses[key] || '';
+      }
+
       insertVolunteerTiles();
     });
   </script>
+
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

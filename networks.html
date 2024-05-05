@@ -145,6 +145,9 @@
           );
           const yamlData = await yamlResponse.text();
           const networkData = jsyaml.load(yamlData);
+          networkData.forEach((tile) => {
+            tile.folderName = folderName;
+          });
           networkTiles.push(...networkData);
         }
         return networkTiles;
@@ -153,10 +156,10 @@
       function createNetworkTiles(networkData) {
         let tilesHTML = '';
         networkData.forEach((network) => {
-          const { name, city, country_code, links, coc } = network;
+          const { name, city, country_code, links, folderName } = network;
           const logoSrc =
             links && links.logo
-              ? `./${links.logo}`
+              ? `./networks/${folderName}/${links.logo}`
               : 'https://www.svgrepo.com/show/508699/landscape-placeholder.svg';
 
           const tileHTML = `
@@ -165,6 +168,7 @@
                 <img src="${logoSrc}" class="network-card-img" alt="${name} Logo"/>
                 <div class="network-card-body">
                   <h5 class="network-card-title">${name}</h5>
+                  <p>${city}, ${country_code}</p>
                   <div class="links">
                     ${generateLinks(links)}
                   </div>
@@ -204,10 +208,11 @@
       function getIconClass(key) {
         const iconClasses = {
           website: 'fa-solid fa-earth-americas',
-          email: 'fa-solid fa-envelope',
           linkedin: 'fa-brands fa-linkedin',
-          github: 'fa-brands fa-github',
           meetup: 'fa-brands fa-meetup',
+          instagram: 'fa-brands fa-instagram',
+          discord: 'fa-brands fa-discord',
+          coc: 'fa-solid fa-file-lines',
         };
         return iconClasses[key] || '';
       }

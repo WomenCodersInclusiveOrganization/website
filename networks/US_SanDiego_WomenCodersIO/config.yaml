@@ -4,11 +4,11 @@
   city: 'San Diego'
   country_code: 'US' # United States
   # Required, can be a notion document etc"
-  coc: 'https://womencoders.tech/code-of-conduct.html'
   links:
     website: 'https://womencoders.tech'
     linkedin: 'https://www.linkedin.com/company/women-coders-san-diego'
     meetup: 'https://www.meetup.com/women-coders-inclusive-organization/'
-    instagram: 'https://instagram.com/women-coders-inclusive-organization/'
+    instagram: ''
     discord: ''
+    coc: 'https://womencoders.tech/code-of-conduct.html'
     logo: 'womenCoders.png'
