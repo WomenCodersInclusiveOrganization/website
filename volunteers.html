@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WCIO - SD</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <!-- FontAwesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="./index.html"
+          >Women Coders Inclusive Org - San Diego</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <ul class="navbar-nav ms-auto nav nav-underline">
+            <li class="nav-item">
+              <a class="nav-link" href="./index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./networks.html">Networks</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="./volunteers.html"
+                >Volunteers</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./code-of-conduct.html"
+                >Code of Conduct</a
+              >
+            </li>
+            <!-- Add other navbar buttons here -->
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content and Right Column -->
+    <div class="container">
+      <div class="row">
+        <!-- Page Content (twice as wide on md and above) -->
+        <div class="col-md-8">
+          <article id="main-message">
+            <h2>Volunteers</h2>
+            <!-- <p>Coming Soon!</p> -->
+          </article>
+          <div id="volunteer-tiles" class="row">
+            <!-- Volunteer tiles dynamically inserted here -->
+          </div>
+        </div>
+        <!-- Right Column -->
+        <div class="col-md-4">
+          <div id="right-column">
+            <a href="./sponsor.html">
+              <button class="btn btn-primary custom-btn">Sponsor Us</button>
+            </a>
+            <!-- <button type="button" class="btn btn-primary">Get Swag</button> -->
+            <div id="upcoming-meetups">
+              <h3>Upcoming Meetups</h3>
+              <div class="sk-meetup-event" data-embed-id="25404079"></div>
+              <script
+                src="https://widgets.sociablekit.com/meetup-group-events/widget.js"
+                async
+                defer
+              ></script>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <!-- Footer -->
+  <footer class="footer mt-auto py-3">
+    <div class="container">
+      <!-- Social Media Links -->
+      <div id="social-media-links">
+        <ul class="list-unstyled d-flex justify-content-center">
+          <li class="me-3">
+            <a
+              href="https://www.meetup.com/women-coders-inclusive-organization/"
+              target="_blank"
+              ><i class="fa-brands fa-meetup fa-2x" style="color: #008dda"></i
+            ></a>
+          </li>
+          <li class="me-3">
+            <a href="https://www.linkedin.com/groups/14429780/" target="_blank"
+              ><i
+                class="fa-brands fa-linkedin-in fa-2x"
+                style="color: #008dda"
+              ></i
+            ></a>
+          </li>
+          <!-- <li>
+              <a href="#"><i class="fa-brands fa-slack-hash fa-2x"></i></a>
+            </li> -->
+        </ul>
+        <p class="text-center mb-0">
+          © 2024 Women Coders Inclusive Org - San Diego. All Rights Reserved.
+        </p>
+      </div>
+    </div>
+  </footer>
+  <script type="module">
+    import folderNames from './volunteers_config.js';
+
+    document.addEventListener('DOMContentLoaded', function () {
+      function insertVolunteerTiles() {
+        const volunteerTilesContainer =
+          document.getElementById('volunteer-tiles');
+        fetchVolunteerTiles().then((volunteerTiles) => {
+          volunteerTiles.forEach((tile) => {
+            volunteerTilesContainer.innerHTML += tile;
+          });
+        });
+      }
+      async function fetchVolunteerTiles() {
+        const volunteerTiles = [];
+        for (const folderName of folderNames) {
+          const indexHtmlResponse = await fetch(
+            `/volunteers/${folderName}/index.html`
+          );
+          const indexHtml = await indexHtmlResponse.text();
+          volunteerTiles.push(indexHtml);
+        }
+        return volunteerTiles;
+      }
+      insertVolunteerTiles();
+    });
+  </script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://kit.fontawesome.com/494bbb1676.js"
+    crossorigin="anonymous"
+  ></script>
+</html>
