@@ -162,6 +162,10 @@ body {
   text-align: center;
 }
 
+.network-card-body p {
+  font-family: monospace, sans-serif;
+}
+
 .network-card-title {
   margin-bottom: 0;
   font-family: monospace, sans-serif;
@@ -219,6 +223,10 @@ body {
 .volunteer-card-body {
   padding: 20px;
   text-align: center;
+}
+
+.volunteer-card-body p {
+  font-family: monospace, sans-serif;
 }
 
 .volunteer-card-title {
