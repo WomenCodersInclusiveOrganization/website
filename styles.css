@@ -1,9 +1,10 @@
 /* Navbar */
 .navbar-brand {
   margin-left: 5rem;
-  font-family: monospace, sans-serif;
-  font-size: 1.4rem !important;
-  color: #f7eedd !important;
+  font-family: 'Dosis', sans-serif;
+  font-weight: bold;
+  font-size: 1.6rem !important;
+  color: white !important;
   white-space: normal !important;
 }
 
@@ -15,12 +16,22 @@
   }
 }
 .navbar {
-  background-color: #008dda;
+  background-color: #0797b1;
 }
 
 .navbar-nav .nav-link {
-  color: #f7eedd !important;
-  font-family: monospace, sans-serif;
+  color: white !important;
+  font-family: 'Dosis', sans-serif;
+  font-weight: normal;
+  font-size: 1.2rem;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #9e4c9d !important;
+}
+
+.navbar-nav .active {
+  color: #862e8d !important;
 }
 
 .ms-auto {
@@ -29,14 +40,21 @@
 
 /* Body */
 body {
-  background-color: #f7eedd !important;
+  /* background-color: #f7eedd !important; */
 }
 
 /* Welcome Message */
 
+#welome-logo {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
 #welcome-message {
   margin: 5rem;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Advent Pro', sans-serif;
+  font-weight: bold;
+  color: #9e4c9d;
 }
 
 @media (max-width: 576px) {
@@ -46,14 +64,16 @@ body {
 }
 
 #welcome-message h2 {
-  font-size: 2.5rem;
-  font-family: monospace, sans-serif;
+  font-size: 3rem;
+  font-family: 'Advent Pro', sans-serif;
+  font-weight: bold;
   margin-bottom: 2rem;
 }
 
 #welcome-message p {
-  font-size: 1rem;
-  font-family: monospace, sans-serif;
+  font-size: 1.4rem;
+  font-family: 'Dosis', sans-serif;
+  font-weight: normal;
 }
 
 /* Right Column */
@@ -76,14 +96,18 @@ body {
   max-width: 20rem;
   height: 4rem;
   margin: 2rem auto;
-  font-size: 1.4rem !important;
-  font-family: monospace, sans-serif;
-  color: #f7eedd;
+  font-size: 1.7rem !important;
+  font-family: 'Dosis', sans-serif;
+  font-weight: normal;
+  color: white;
 }
 
 #right-column h3 {
-  font-size: 1.5rem;
-  font-family: monospace, sans-serif;
+  font-size: 1.8rem;
+  font-family: 'Advent Pro', sans-serif;
+  font-weight: bold;
+  color: #9e4c9d;
+  margin-bottom: 1.5rem;
 }
 
 #right-column a {
@@ -91,26 +115,28 @@ body {
 }
 
 #upcoming-meetups {
-  border: 2px solid #666666;
+  border: 2px solid #9e4c9d;
   border-radius: 10px;
   padding: 20px;
 }
 
 .custom-btn {
-  background-color: #008dda !important;
-  border-color: #008dda !important;
+  background-color: #0797b1 !important;
+  border-color: #0797b1 !important;
 }
 
 .custom-btn:hover {
-  background-color: #41c9e2 !important;
-  border-color: #41c9e2 !important;
+  background-color: #50899b !important;
+  border-color: #50899b !important;
 }
 
 /* Secondary Pages Message */
 
 #main-message {
   margin: 5rem;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Advent Pro', sans-serif;
+  font-weight: bold;
+  color: #9e4c9d;
 }
 
 @media (max-width: 576px) {
@@ -120,14 +146,16 @@ body {
 }
 
 #main-message h2 {
-  font-size: 2.5rem;
-  font-family: monospace, sans-serif;
+  font-size: 3rem;
+  font-family: 'Advent Pro', sans-serif;
+  font-weight: bold;
   margin-bottom: 2rem;
 }
 
 #main-message p {
-  font-size: 1rem;
-  font-family: monospace, sans-serif;
+  font-size: 1.4rem;
+  font-family: 'Dosis', sans-serif;
+  font-weight: normal;
 }
 
 /* Network Tiles */
@@ -142,7 +170,8 @@ body {
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
-  background-color: #fbf7ee;
+  background-color: white;
+  color: #9e4c9d;
 }
 
 .network-card:hover {
@@ -163,12 +192,14 @@ body {
 }
 
 .network-card-body p {
-  font-family: monospace, sans-serif;
+  font-family: 'Dosis', sans-serif;
+  font-weight: normal;
 }
 
 .network-card-title {
   margin-bottom: 0;
-  font-family: monospace, sans-serif;
+  font-family: 'Advent Pro', sans-serif;
+  font-weight: bold;
   font-size: 1.5rem;
 }
 
@@ -205,7 +236,7 @@ body {
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
-  background-color: #fbf7ee;
+  background-color: white;
 }
 
 .volunteer-card:hover {
@@ -226,12 +257,14 @@ body {
 }
 
 .volunteer-card-body p {
-  font-family: monospace, sans-serif;
+  font-family: 'Dosis', sans-serif;
+  font-weight: normal;
 }
 
 .volunteer-card-title {
   margin-bottom: 0;
-  font-family: monospace, sans-serif;
+  font-family: 'Advent Pro', sans-serif;
+  font-weight: bold;
   font-size: 1.5rem;
 }
 
