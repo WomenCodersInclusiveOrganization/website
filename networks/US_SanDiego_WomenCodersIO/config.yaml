@@ -1,12 +1,12 @@
 # Women Coders Inclusive Organization YAML Data
 # Country codes reference: https://www.iban.com/country-codes
-- name: 'Women Coders IO'
+- name: 'Women Coders Inclusive Org'
   city: 'San Diego'
   country_code: 'US' # United States
   # Required, can be a notion document etc"
   links:
     website: 'https://womencoders.tech'
-    linkedin: 'https://www.linkedin.com/company/women-coders-san-diego'
+    linkedin: 'https://www.linkedin.com/company/women-coders-san-diego/'
     meetup: 'https://www.meetup.com/women-coders-inclusive-organization/'
     instagram: ''
     discord: ''

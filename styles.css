@@ -46,7 +46,7 @@ body {
 /* Welcome Message */
 
 #welome-logo {
-  width: 100%;
+  width: 50%;
   margin-bottom: 2rem;
 }
 
@@ -73,7 +73,7 @@ body {
 #welcome-message p {
   font-size: 1.4rem;
   font-family: 'Dosis', sans-serif;
-  font-weight: normal;
+  font-weight: 550;
 }
 
 /* Right Column */
@@ -155,7 +155,7 @@ body {
 #main-message p {
   font-size: 1.4rem;
   font-family: 'Dosis', sans-serif;
-  font-weight: normal;
+  font-weight: 550;
 }
 
 /* Network Tiles */
@@ -193,7 +193,7 @@ body {
 
 .network-card-body p {
   font-family: 'Dosis', sans-serif;
-  font-weight: normal;
+  font-weight: 550;
 }
 
 .network-card-title {
@@ -258,7 +258,7 @@ body {
 
 .volunteer-card-body p {
   font-family: 'Dosis', sans-serif;
-  font-weight: normal;
+  font-weight: 550;
 }
 
 .volunteer-card-title {
