@@ -158,6 +158,13 @@
   font-weight: 550;
 }
 
+/* TODO why can't I combine this with above p? */
+#main-message li {
+  font-size: 1.4rem;
+  font-weight: 550;
+  font-family: 'Dosis', sans-serif;
+}
+
 /* Network Tiles */
 
 .network-tile {
@@ -216,6 +223,7 @@
 }
 
 .network-card .link i {
+  /* TODO Make relative */
   font-size: 35px;
   margin: 0 5px;
 }
@@ -359,6 +367,7 @@
   /* max-width: 20rem; */
   height: 3rem;
   margin: 2rem auto;
+  /* TODO CSS varibale, debug why ! */
   font-size: 1.3rem !important;
   font-family: 'Dosis', sans-serif;
   font-weight: normal;
