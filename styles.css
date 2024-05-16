@@ -76,10 +76,24 @@
   font-weight: 550;
 }
 
+.custom-volunteer-btn {
+  height: 3rem;
+  width: 30%;
+  margin-top: 1rem;
+  font-size: 1.3rem !important;
+  background-color: #0797b1 !important;
+  border-color: #0797b1 !important;
+}
+
+.custom-volunteer-btn:hover {
+  background-color: #50899b !important;
+  border-color: #50899b !important;
+}
+
 /* Right Column */
 
 #right-column {
-  margin: 5rem 2rem 0 2rem;
+  margin: 5rem 1.5rem 0 1.5rem;
   text-align: center;
   min-width: 292px;
 }
@@ -304,9 +318,9 @@
   width: 100%;
 }
 
-.event-tile {
-  margin-bottom: 20px;
-}
+/* .event-tile {
+  margin-bottom: 10px;
+} */
 
 /* .event-card {
   border: 1px solid #ccc;
@@ -316,19 +330,19 @@
 } */
 
 .event-card-img {
-  width: 100%;
+  max-width: 100%;
   height: auto;
   border-radius: 10px 10px 0 0;
 }
 
 .event-card-body {
-  padding: 20px;
+  /* padding: 20px; */
   text-align: left; /* Adjusted text alignment */
 }
 
 .event-card-title {
   margin-top: 0;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   font-family: 'Advent Pro', sans-serif;
   font-weight: bold;
   font-size: 1.4rem;

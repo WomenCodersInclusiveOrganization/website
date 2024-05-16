@@ -87,18 +87,29 @@
           <article id="main-message">
             <h2>Networks</h2>
             <p>
-              With the shutdown of Women Who Code, we have hundreds of energized communities in which people have worked to help women thrive in technology careers. This emphatically includes trans women and genderqueer folks.
-          </p>
-          
-          <p>
-              That is the main vision which we hope to promote moving forward as an individual group, but especially with our sister groups. One benefit of WWCode was that it was searchable; it was possible to move to a new city and find a group with shared values and target audience, and this list is to host a centralized directory.
-          </p>
-          
-          <p>
-              To add a group, first make sure the group agrees to the above and include a link to your Code of Conduct in the comments of your PR: 
-              <a href="https://github.com/WomenCodersInclusiveOrganization/website/tree/main" target="_blank">WomenCodersInclusiveOrganization/website</a>
-          </p>
-          
+              With the shutdown of Women Who Code, we have hundreds of energized
+              communities in which people have worked to help women thrive in
+              technology careers. This emphatically includes trans women and
+              genderqueer folks.
+            </p>
+
+            <p>
+              That is the main vision which we hope to promote moving forward as
+              an individual group, but especially with our sister groups. One
+              benefit of WWCode was that it was searchable; it was possible to
+              move to a new city and find a group with shared values and target
+              audience, and this list is to host a centralized directory.
+            </p>
+
+            <p>
+              To add a group, first make sure the group agrees to the above and
+              include a link to your Code of Conduct in the comments of your PR:
+              <a
+                href="https://github.com/WomenCodersInclusiveOrganization/website/tree/main"
+                target="_blank"
+                >WomenCodersInclusiveOrganization/website</a
+              >
+            </p>
           </article>
           <div id="network-tiles" class="row">
             <!-- Network tiles dynamically inserted here -->
@@ -252,7 +263,7 @@
       async function fetchEventData() {
         const eventData = [];
         // Loop through possible event filenames
-        for (let i = 1; i <= 2; i++) {
+        for (let i = 1; i <= 3; i++) {
           try {
             const yamlResponse = await fetch(
               `/upcoming_meetups/event_${i}.yaml`
