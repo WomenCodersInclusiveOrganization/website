@@ -79,6 +79,7 @@
 .custom-volunteer-btn {
   height: 3rem;
   width: 30%;
+  min-width: 155px;
   margin-top: 1rem;
   font-size: 1.3rem !important;
   background-color: #0797b1 !important;
