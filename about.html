@@ -110,12 +110,7 @@
             <!-- <button type="button" class="btn btn-primary">Get Swag</button> -->
             <div id="upcoming-meetups">
               <h3>Upcoming Meetups</h3>
-              <div class="sk-meetup-event" data-embed-id="25404079"></div>
-              <script
-                src="https://widgets.sociablekit.com/meetup-group-events/widget.js"
-                async
-                defer
-              ></script>
+              <div id="event-tiles"></div>
             </div>
           </div>
         </div>
@@ -155,6 +150,80 @@
       </div>
     </div>
   </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+
+  <script type="module">
+    import jsyaml from 'https://cdn.skypack.dev/js-yaml';
+
+    document.addEventListener('DOMContentLoaded', function () {
+      async function fetchEventData() {
+        const eventData = [];
+        // Loop through possible event filenames
+        for (let i = 1; i <= 2; i++) {
+          try {
+            const yamlResponse = await fetch(
+              `/upcoming_meetups/event_${i}.yaml`
+            );
+            const yamlData = await yamlResponse.text();
+            const eventDataPart = jsyaml.load(yamlData);
+            if (eventDataPart) {
+              eventData.push(...eventDataPart);
+            }
+          } catch (error) {
+            console.error(`Error fetching event_${i}.yaml:`, error);
+          }
+        }
+        return eventData;
+      }
+
+      function createEventTiles(eventData) {
+        let tilesHTML = '';
+        eventData.forEach((event) => {
+          if (
+            event &&
+            event.title &&
+            event.date &&
+            event.time &&
+            event.address &&
+            event.link
+          ) {
+            const { image, title, date, time, address, link } = event;
+
+            const tileHTML = `
+              <div class="event-tile">
+                <div class="event-card">
+                  <img src="${
+                    image ||
+                    'https://www.svgrepo.com/show/508699/landscape-placeholder.svg'
+                  }" class="event-card-img" alt="${title || 'Event'} Image"/>
+                  <div class="event-card-body">
+                    <h5 class="event-card-title">${
+                      title || 'Untitled Event'
+                    }</h5>
+                    <p>${date}<br>${time}<br>${address}</p>
+                    <div class="event-links">
+                      <a href="${link}" target="_blank" class="btn btn-primary custom-event-btn">Read More</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `;
+            tilesHTML += tileHTML;
+          }
+        });
+        return tilesHTML;
+      }
+
+      async function insertEventTiles() {
+        const eventTilesContainer = document.getElementById('event-tiles');
+        const eventData = await fetchEventData();
+        const tilesHTML = createEventTiles(eventData);
+        eventTilesContainer.innerHTML = tilesHTML;
+      }
+
+      insertEventTiles();
+    });
+  </script>
 
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

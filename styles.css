@@ -39,9 +39,9 @@
 }
 
 /* Body */
-body {
-  /* background-color: #f7eedd !important; */
-}
+/* body {
+  background-color: #f7eedd !important;
+} */
 
 /* Welcome Message */
 
@@ -287,4 +287,90 @@ body {
 
 .volunteer-card .link:hover {
   color: #007bff;
+}
+
+/* Upcoming Meetups */
+
+/* Style for event cards */
+#event-tiles {
+  width: 100%;
+}
+
+.event-tile {
+  margin-bottom: 20px;
+}
+
+/* .event-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+} */
+
+.event-card-img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px 10px 0 0;
+}
+
+.event-card-body {
+  padding: 20px;
+  text-align: left; /* Adjusted text alignment */
+}
+
+.event-card-title {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-family: 'Advent Pro', sans-serif;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: #9e4c9d;
+}
+
+.event-card-body p {
+  margin-bottom: 15px;
+  font-family: 'Dosis', sans-serif;
+  font-weight: 550;
+  font-size: 1.2rem;
+  color: #862e8d;
+}
+
+.event-links {
+  margin-top: 10px;
+  font-family: 'Dosis', sans-serif;
+  font-weight: 550;
+}
+
+.event-link {
+  display: inline-block;
+  margin-right: 10px;
+  color: #0797b1;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.event-link:hover {
+  text-decoration: underline;
+}
+
+#right-column .custom-event-btn {
+  display: block;
+  width: 60%;
+  /* max-width: 20rem; */
+  height: 3rem;
+  margin: 2rem auto;
+  font-size: 1.3rem !important;
+  font-family: 'Dosis', sans-serif;
+  font-weight: normal;
+  color: white;
+}
+
+.custom-event-btn {
+  background-color: #0797b1 !important;
+  border-color: #0797b1 !important;
+}
+
+.custom-event-btn:hover {
+  background-color: #50899b !important;
+  border-color: #50899b !important;
 }
