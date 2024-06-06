@@ -38,6 +38,10 @@
   padding-right: 5rem;
 }
 
+p a {
+  word-wrap: break-word;
+}
+
 /* Body */
 /* body {
   background-color: #f7eedd !important;
@@ -184,7 +188,7 @@
 
 .network-tile {
   margin-bottom: 20px;
-  min-width: 380px;
+  min-width: 360px;
 }
 
 .network-card {
@@ -251,7 +255,7 @@
 
 .volunteer-tile {
   margin-bottom: 20px;
-  min-width: 380px;
+  min-width: 360px;
 }
 
 .volunteer-card {
