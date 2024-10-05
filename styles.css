@@ -88,11 +88,13 @@ p a {
   font-size: 1.7rem !important;
   background-color: #0797b1 !important;
   border-color: #0797b1 !important;
+  text-decoration: none !important;
 }
 
 .custom-volunteer-btn:hover {
   background-color: #50899b !important;
   border-color: #50899b !important;
+  text-decoration: none !important;
 }
 
 /* Right Column */
@@ -401,4 +403,8 @@ p a {
 .custom-event-btn:hover {
   background-color: #50899b !important;
   border-color: #50899b !important;
+}
+
+.a-btn {
+  text-decoration: none !important;
 }

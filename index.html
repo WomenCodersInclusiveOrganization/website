@@ -100,9 +100,17 @@
               today and find your community where you can make a significant
               impact and thrive.
             </p>
-            <a href="https://mailchi.mp/02852fa81e01/volunteer-sign-up">
+            <a
+              href="https://mailchi.mp/02852fa81e01/volunteer-sign-up"
+              class="a-btn"
+            >
               <button class="btn btn-primary custom-volunteer-btn">
                 Volunteer Signup
+              </button>
+            </a>
+            <a href="./sponsor.html" class="a-btn">
+              <button class="btn btn-primary custom-volunteer-btn">
+                Sponsor Us
               </button>
             </a>
           </article>
@@ -110,9 +118,9 @@
         <!-- Right Column -->
         <div class="col-md-4">
           <div id="right-column">
-            <a href="./sponsor.html">
+            <!-- <a href="./sponsor.html">
               <button class="btn btn-primary custom-btn">Sponsor Us</button>
-            </a>
+            </a> -->
             <!-- <button type="button" class="btn btn-primary">Get Swag</button> -->
             <div id="upcoming-meetups">
               <h3>Upcoming Meetups</h3>
@@ -172,7 +180,7 @@
         async function fetchEventData() {
           const eventData = [];
           // Loop through possible event filenames
-          for (let i = 1; i <= 2; i++) {
+          for (let i = 1; i <= 3; i++) {
             try {
               const yamlResponse = await fetch(
                 `/upcoming_meetups/event_${i}.yaml`
