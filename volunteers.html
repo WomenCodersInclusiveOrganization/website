@@ -175,19 +175,19 @@
       function createVolunteerTiles(volunteerData) {
         let tilesHTML = '';
         volunteerData.forEach((volunteer) => {
-          const { name, city, country_code, links, folderName } = volunteer;
+          const { name, city, state_code, links, folderName } = volunteer;
           const logoSrc =
             links && links.logo
               ? `./volunteers/${folderName}/${links.logo}`
               : 'https://www.svgrepo.com/show/508699/landscape-placeholder.svg';
 
           const tileHTML = `
-            <div class="volunteer-tile col-md-6">
+            <div class="volunteer-tile col-md-4">
               <div class="volunteer-card">
                 <img src="${logoSrc}" class="volunteer-card-img" alt="${name} Logo"/>
                 <div class="volunteer-card-body">
                   <h5 class="volunteer-card-title">${name}</h5>
-                  <p>${city}, ${country_code}</p>
+                  <p>${city}, ${state_code}</p>
                   <div class="links">
                     ${generateLinks(links)}
                   </div>

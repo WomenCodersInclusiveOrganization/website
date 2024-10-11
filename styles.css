@@ -47,6 +47,12 @@ p a {
   background-color: #f7eedd !important;
 } */
 
+@media (min-width: 1600px) {
+  .container {
+    max-width: 1500px !important;
+  }
+}
+
 /* Welcome Message */
 
 #welome-logo {
@@ -257,7 +263,8 @@ p a {
 
 .volunteer-tile {
   margin-bottom: 20px;
-  min-width: 360px;
+  min-width: 250px;
+  display: flex;
 }
 
 .volunteer-card {
@@ -266,6 +273,7 @@ p a {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
   background-color: white;
+  flex-grow: 1;
 }
 
 .volunteer-card:hover {
