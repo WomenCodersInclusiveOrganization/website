@@ -89,7 +89,7 @@ p a {
 .custom-volunteer-btn {
   height: 3.5rem;
   width: 30%;
-  min-width: 155px;
+  min-width: 200px;
   margin-top: 1rem;
   font-size: 1.7rem !important;
   background-color: #0797b1 !important;
@@ -106,9 +106,9 @@ p a {
 /* Right Column */
 
 #right-column {
-  margin: 5rem 1.5rem 0 1.5rem;
+  margin: 5rem 0 0 1.5rem;
   text-align: center;
-  min-width: 292px;
+  /* min-width: 320px; */
 }
 
 @media (max-width: 576px) {
@@ -160,7 +160,7 @@ p a {
 /* Secondary Pages Message */
 
 #main-message {
-  margin: 5rem;
+  margin: 5rem 0 2rem 0;
   font-family: 'Advent Pro', sans-serif;
   font-weight: bold;
   color: #9e4c9d;
