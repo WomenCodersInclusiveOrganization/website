@@ -140,7 +140,7 @@
             <a
               href="https://www.meetup.com/women-coders-inclusive-organization/"
               target="_blank"
-              ><i class="fa-brands fa-meetup fa-2x" style="color: #0797b1"></i
+              ><i class="fa-brands fa-meetup fa-3x" style="color: #0797b1"></i
             ></a>
           </li>
           <li class="me-3">
@@ -148,14 +148,14 @@
               href="https://www.linkedin.com/company/women-coders-san-diego/"
               target="_blank"
               ><i
-                class="fa-brands fa-linkedin-in fa-2x"
+                class="fa-brands fa-linkedin-in fa-3x"
                 style="color: #0797b1"
               ></i
             ></a>
           </li>
           <li class="me-3">
             <a href="mailto: womencodersio@gmail.com" target="_blank"
-              ><i class="fa-solid fa-envelope fa-2x" style="color: #0797b1"></i
+              ><i class="fa-solid fa-envelope fa-3x" style="color: #0797b1"></i
             ></a>
           </li>
           <!-- <li>
@@ -208,24 +208,25 @@
             const { image, title, date, time, address, link } = event;
 
             const tileHTML = `
-              <div class="event-tile">
-                <div class="event-card">
-                  <img src="${
-                    image ||
-                    'https://www.svgrepo.com/show/508699/landscape-placeholder.svg'
-                  }" class="event-card-img" alt="${title || 'Event'} Image"/>
-                  <div class="event-card-body">
-                    <h5 class="event-card-title">${
-                      title || 'Untitled Event'
-                    }</h5>
-                    <p>${date}<br>${time}<br>${address}</p>
-                    <div class="event-links">
-                      <a href="${link}" target="_blank" class="btn btn-primary custom-event-btn">Read More</a>
+              <a href="${link}" target="_blank" class="">  
+                <div class="event-tile">
+                    <div class="event-card">
+                      <img src="${
+                        image ||
+                        'https://www.svgrepo.com/show/508699/landscape-placeholder.svg'
+                      }" class="event-card-img" alt="${
+              title || 'Event'
+            } Image"/>
+                      <div class="event-card-body">
+                        <h5 class="event-card-title">${
+                          title || 'Untitled Event'
+                        }</h5>
+                        <p>${date}<br>${time}<br>${address}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            `;
+                </a>
+              `;
             tilesHTML += tileHTML;
           }
         });

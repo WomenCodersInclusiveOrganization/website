@@ -55,9 +55,22 @@ p a {
 
 /* Welcome Message */
 
-#welome-logo {
-  width: 50%;
-  margin-bottom: 2rem;
+.welcome-logo {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* Media query for screens 1400px or wider */
+@media (min-width: 1400px) {
+  .welcome-logo {
+    width: 80%;
+  }
+}
+
+.welcome-logo-div {
+  text-align: center;
 }
 
 #welcome-message {
@@ -87,14 +100,15 @@ p a {
 }
 
 .custom-volunteer-btn {
-  height: 3.5rem;
-  width: 30%;
+  height: 3.3rem;
+  width: 20%;
   min-width: 200px;
   margin-top: 1rem;
-  font-size: 1.7rem !important;
+  font-size: 1.6rem !important;
   background-color: #0797b1 !important;
   border-color: #0797b1 !important;
   text-decoration: none !important;
+  margin-right: 50px;
 }
 
 .custom-volunteer-btn:hover {
@@ -106,9 +120,9 @@ p a {
 /* Right Column */
 
 #right-column {
-  margin: 5rem 0 0 1.5rem;
+  margin: 5rem 1.5rem 0 1.5rem;
   text-align: center;
-  /* min-width: 320px; */
+  width: 100%;
 }
 
 @media (max-width: 576px) {
@@ -176,7 +190,6 @@ p a {
   font-size: 3rem;
   font-family: 'Advent Pro', sans-serif;
   font-weight: bold;
-  margin-bottom: 2rem;
 }
 
 #main-message p {
@@ -185,7 +198,6 @@ p a {
   font-weight: 550;
 }
 
-/* TODO why can't I combine this with above p? */
 #main-message li {
   font-size: 1.4rem;
   font-weight: 550;
@@ -333,31 +345,51 @@ p a {
   width: 100%;
 }
 
-/* .event-tile {
-  margin-bottom: 10px;
-} */
-
-/* .event-card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
+.event-tile {
+  position: relative;
+  display: block;
+  text-decoration: none;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-} */
-
-.event-card-img {
-  max-width: 100%;
-  height: auto;
   border-radius: 10px;
 }
 
+.event-tile::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(186, 186, 186, 0.35);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.event-tile:hover::after {
+  opacity: 1;
+}
+
+.event-card-img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  position: relative;
+  z-index: 2;
+}
+
 .event-card-body {
-  /* padding: 20px; */
-  text-align: left; /* Adjusted text alignment */
+  text-align: left;
+  padding: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.event-card {
+  z-index: 1;
 }
 
 .event-card-title {
   margin-top: 0;
-  /* margin-bottom: 10px; */
   font-family: 'Advent Pro', sans-serif;
   font-weight: bold;
   font-size: 1.4rem;
@@ -393,10 +425,8 @@ p a {
 #right-column .custom-event-btn {
   display: block;
   width: 60%;
-  /* max-width: 20rem; */
   height: 3.5rem;
   margin: 2rem auto;
-  /* TODO CSS varibale, debug why ! */
   font-size: 1.7rem !important;
   font-family: 'Dosis', sans-serif;
   font-weight: normal;
