@@ -30,19 +30,6 @@
       href="https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,100..900;1,100..900&family=Dosis:wght@200..800&display=swap"
       rel="stylesheet"
     />
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-8VL9WPQMMT"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-      gtag('config', 'G-8VL9WPQMMT');
-    </script>
   </head>
   <body>
     <!-- Navbar -->
@@ -68,9 +55,7 @@
               <a class="nav-link" href="./index.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="./about.html"
-                >About</a
-              >
+              <a class="nav-link" href="./about.html">About</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="./networks.html">Networks</a>
@@ -79,7 +64,12 @@
               <a class="nav-link" href="./volunteers.html">Volunteers</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./events.html">Events</a>
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="./events.html"
+                >Events</a
+              >
             </li>
             <li class="nav-item">
               <a class="nav-link" href="./code-of-conduct.html"
@@ -96,40 +86,28 @@
     <div class="container">
       <div class="row">
         <!-- Page Content (twice as wide on md and above) -->
-        <div class="col-md-8">
+        <div class="col-lg-12">
           <article id="main-message">
-            <h2>About Us</h2>
-            <p>
-              Are you eager to connect, empower, and innovate within a diverse
-              tech community? At Women Coders Inclusive Org - San Diego, we're
-              committed to empowering women to excel in technology careers. Our
-              mission is to host events that inspire and support all members in
-              their professional growth. We create an inclusive environment
-              where every member can thrive, prioritizing safety and security.
-            </p>
-            <p>
-              Join us for regular meetups, skill-building workshops, and
-              engaging speaker events tailored to inspire, educate, and foster
-              collaborations. Here, you can expand your skills, share your
-              unique experiences, and grow your professional network in a
-              supportive setting. Together, let's break barriers and pave the
-              way for a more inclusive future in tech.
-            </p>
+            <h2>Events</h2>
+            <!-- <a href="https://mailchi.mp/02852fa81e01/volunteer-sign-up">
+              <button class="btn btn-primary custom-volunteer-btn">
+                Volunteer Signup
+              </button>
+            </a> -->
           </article>
+          <div id="event-page-tiles" class="row">
+            <!-- Volunteer tiles dynamically inserted here -->
+          </div>
         </div>
         <!-- Right Column -->
-        <div class="col-md-4">
+        <!-- <div class="col-lg-4">
           <div id="right-column">
-            <!-- <a href="./sponsor.html">
-              <button class="btn btn-primary custom-btn">Sponsor Us</button>
-            </a> -->
-            <!-- <button type="button" class="btn btn-primary">Get Swag</button> -->
             <div id="upcoming-meetups">
               <h3>Upcoming Meetups</h3>
               <div id="event-tiles"></div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </body>
@@ -177,29 +155,27 @@
     import jsyaml from 'https://cdn.skypack.dev/js-yaml';
 
     document.addEventListener('DOMContentLoaded', function () {
-      async function fetchEventData() {
-        const eventData = [];
+      async function fetchEventPageData() {
+        const eventPageData = [];
         // Loop through possible event filenames
-        for (let i = 1; i <= 2; i++) {
+        for (let i = 1; i <= 3; i++) {
           try {
-            const yamlResponse = await fetch(
-              `/upcoming_meetups/event_${i}.yaml`
-            );
+            const yamlResponse = await fetch(`/events/event_${i}.yaml`);
             const yamlData = await yamlResponse.text();
-            const eventDataPart = jsyaml.load(yamlData);
-            if (eventDataPart) {
-              eventData.push(...eventDataPart);
+            const eventPageDataPart = jsyaml.load(yamlData);
+            if (eventPageDataPart) {
+              eventPageData.push(...eventPageDataPart);
             }
           } catch (error) {
             console.error(`Error fetching event_${i}.yaml:`, error);
           }
         }
-        return eventData;
+        return eventPageData;
       }
 
-      function createEventTiles(eventData) {
+      function createEventPageTiles(eventPageData) {
         let tilesHTML = '';
-        eventData.forEach((event) => {
+        eventPageData.forEach((event) => {
           if (
             event &&
             event.title &&
@@ -211,17 +187,17 @@
             const { image, title, date, time, address, link } = event;
 
             const tileHTML = `
-              <a href="${link}" target="_blank" class="">  
-                <div class="event-tile">
-                    <div class="event-card">
+              <a href="${link}" target="_blank" class="col-lg-4">  
+                <div class="event-page-tile">
+                    <div class="event-page-card">
                       <img src="${
                         image ||
                         'https://www.svgrepo.com/show/508699/landscape-placeholder.svg'
                       }" class="event-card-img" alt="${
               title || 'Event'
             } Image"/>
-                      <div class="event-card-body">
-                        <h5 class="event-card-title">${
+                      <div class="event-page-card-body">
+                        <h5 class="event-page-card-title">${
                           title || 'Untitled Event'
                         }</h5>
                         <p>${date}<br>${time}<br>${address}</p>
@@ -236,14 +212,16 @@
         return tilesHTML;
       }
 
-      async function insertEventTiles() {
-        const eventTilesContainer = document.getElementById('event-tiles');
-        const eventData = await fetchEventData();
-        const tilesHTML = createEventTiles(eventData);
-        eventTilesContainer.innerHTML = tilesHTML;
+      async function insertEventPageTiles() {
+        const eventPageTilesContainer =
+          document.getElementById('event-page-tiles');
+        const eventPageData = await fetchEventPageData();
+        const tilesHTML = createEventPageTiles(eventPageData);
+        eventPageTilesContainer.innerHTML = tilesHTML;
+        console.log(eventPageData);
       }
 
-      insertEventTiles();
+      insertEventPageTiles();
     });
   </script>
 

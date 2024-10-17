@@ -1,0 +1,8 @@
+# example event config below. Max of two events. File names: event_1.yaml & event_2.yaml
+
+- image: 'https://secure.meetupstatic.com/photos/event/b/f/5/5/600_520668981.webp?w=384'
+  title: '[In-Person] Third Thursday Thrive! Building Upon a Technical Foundation'
+  date: 'Thursday, May 16, 2024'
+  time: '5:30 PM to 7:30 PM PDT'
+  address: '6027 Edgewood Bend Ct., San Diego, CA 92130'
+  link: 'https://www.meetup.com/women-coders-inclusive-organization/events/300652605/'

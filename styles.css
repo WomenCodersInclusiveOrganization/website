@@ -446,3 +446,92 @@ p a {
 .a-btn {
   text-decoration: none !important;
 }
+
+/* Event page cards */
+
+#event-page-tiles {
+  /* width: 100vw; */
+}
+
+#event-page-tiles a {
+  text-decoration: none;
+}
+
+.event-page-tile {
+  position: relative;
+  text-decoration: none;
+  overflow: hidden;
+  border-radius: 10px;
+  max-width: 500px;
+  margin-bottom: 20px;
+  box-shadow: 0px 0px 10px 0px rgba(135, 135, 135, 1);
+}
+
+.event-page-tile::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(186, 186, 186, 0.35);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.event-page-tile:hover::after {
+  opacity: 1;
+}
+
+.event-page-card-img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  position: relative;
+  z-index: 2;
+}
+
+.event-page-card-body {
+  text-align: left;
+  padding: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.event-page-card {
+  z-index: 1;
+}
+
+.event-page-card-title {
+  margin-top: 0;
+  font-family: 'Advent Pro', sans-serif;
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: #9e4c9d;
+}
+
+.event-page-card-body p {
+  margin-bottom: 15px;
+  font-family: 'Dosis', sans-serif;
+  font-weight: 550;
+  font-size: 1.1rem;
+  color: #862e8d;
+}
+
+.event-page-links {
+  margin-top: 10px;
+  font-family: 'Dosis', sans-serif;
+  font-weight: 550;
+}
+
+.event-page-link {
+  display: inline-block;
+  margin-right: 10px;
+  color: #0797b1;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.event-page-link:hover {
+  text-decoration: underline;
+}
