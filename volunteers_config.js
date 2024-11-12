@@ -9,6 +9,8 @@ const folderNames = [
   'jenni_preciado',
   'jemadean_vasquez',
   'leslie_pajuelo',
+  'munira_nasser_webb',
+  'debbie_(myers)_mest',
 
   // Add more folder names as needed
 ].sort();
