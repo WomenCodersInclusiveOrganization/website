@@ -72,7 +72,7 @@
             <li class="nav-item">
               <a class="nav-link" href="./about.html">About</a>
             </li>
-<!--             <li class="nav-item">
+            <!--             <li class="nav-item">
               <a class="nav-link" href="./networks.html">Networks</a>
             
             </li> -->
@@ -86,6 +86,9 @@
               <a class="nav-link" href="./code-of-conduct.html"
                 >Code of Conduct</a
               >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./sponsor.html">Sponsor Us</a>
             </li>
             <!-- Add other navbar buttons here -->
           </ul>
@@ -200,7 +203,7 @@
         async function fetchEventData() {
           const eventData = [];
           // Loop through possible event filenames
-          for (let i = 1; i <= 2; i++) {
+          for (let i = 1; i <= 1; i++) {
             try {
               const yamlResponse = await fetch(
                 `/upcoming_meetups/event_${i}.yaml`

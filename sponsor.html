@@ -1,363 +1,483 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WCIO</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico" />
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <!-- FontAwesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,100..900;1,100..900&family=Dosis:wght@200..800&display=swap"
+      rel="stylesheet"
+    />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WCIO</title>
-  <link rel="stylesheet" href="styles.css" />
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="./images/favicon.ico" />
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-  <!-- FontAwesome -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,100..900;1,100..900&family=Dosis:wght@200..800&display=swap"
-    rel="stylesheet" />
-  
-  <!-- TODO move to CSS add namespaces for classes -->
-  <style>
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+    <!-- TODO move to CSS add namespaces for classes -->
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
 
-    th,
-    td {
-      padding: 10px;
-      border: 1px solid #ddd;
-      text-align: left;
-    }
+      th,
+      td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: left;
+      }
 
-    tr:nth-child(even) {
-      background-color: #f2f2f2;
-    }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
 
-    tr:hover {
-      background-color: #ddd;
-    }
+      tr:hover {
+        background-color: #ddd;
+      }
 
-    img {
-      width: 200px;
-      cursor: pointer;
-    }
+      img {
+        width: 200px;
+        cursor: pointer;
+      }
 
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1;
-      padding-top: 60px;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgb(0, 0, 0);
-      background-color: rgba(0, 0, 0, 0.9);
-    }
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 60px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.9);
+      }
 
-    .modal-content {
-      margin: auto;
-      display: block;
-      width: 80%;
-      max-width: 700px;
-    }
+      .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+      }
 
-    .modal-content img {
-      width: 100%;
-    }
+      .modal-content img {
+        width: 100%;
+      }
 
-    .close {
-      position: absolute;
-      top: 15px;
-      right: 35px;
-      color: #fff;
-      font-size: 40px;
-      font-weight: bold;
-      transition: 0.3s;
-    }
+      .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #fff;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+      }
 
-    .close:hover,
-    .close:focus {
-      color: #bbb;
-      text-decoration: none;
-      cursor: pointer;
-    }
-  </style>
-  <!-- TODO JS file? or here? -->
-  <script>
-    function openModal(src) {
-      document.getElementById("modalImage").src = src;
-      document.getElementById("myModal").style.display = "block";
-    }
-    function closeModal() {
-      document.getElementById("myModal").style.display = "none";
-    }
-  </script>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8VL9WPQMMT"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-8VL9WPQMMT');
-</script>
-</head>
+      .close:hover,
+      .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    </style>
+    <!-- TODO JS file? or here? -->
+    <script>
+      function openModal(src) {
+        document.getElementById('modalImage').src = src;
+        document.getElementById('myModal').style.display = 'block';
+      }
+      function closeModal() {
+        document.getElementById('myModal').style.display = 'none';
+      }
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-8VL9WPQMMT"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-8VL9WPQMMT');
+    </script>
+  </head>
 
-<body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="./index.html">Women Coders Inclusive Org</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <ul class="navbar-nav ms-auto nav nav-underline">
-          <li class="nav-item">
-            <a class="nav-link" href="./index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./about.html">About</a>
-          </li>
-          <li class="nav-item">
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="./index.html"
+          >Women Coders Inclusive Org</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <ul class="navbar-nav ms-auto nav nav-underline">
+            <li class="nav-item">
+              <a class="nav-link" href="./index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./about.html">About</a>
+            </li>
+            <!-- <li class="nav-item">
             <a class="nav-link" href="./networks.html">Networks</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./volunteers.html">Volunteers</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./events.html">Events</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./code-of-conduct.html">Code of Conduct</a>
-          </li>
-          <!-- Add other navbar buttons here -->
-        </ul>
+          </li> -->
+            <li class="nav-item">
+              <a class="nav-link" href="./volunteers.html">Volunteers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./events.html">Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./code-of-conduct.html"
+                >Code of Conduct</a
+              >
+            </li>
+            <li class="nav-link active" aria-current="page">
+              <a class="nav-link" href="./sponsor.html">Sponsor Us</a>
+            </li>
+            <!-- Add other navbar buttons here -->
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
-  <!-- Sponsor Message and Right Column -->
-  <div class="container">
-    <div class="row">
-      <!-- Sponsor Message (twice as wide on md and above) -->
-      <div class="col-md-8">
-        <article id="main-message">
-          <h2>Support Our Community</h2>
-          <p>Our group thrives on the support of members like you. We have ongoing expenses and your contributions can
-            make a significant difference. If you would like recognition for your contribution, please send an email to
-            <a href="mailto:womencodersio@gmail.com">womencodersio@gmail.com</a>.
-          </p>
-          <p>We are still working out the details, and your patience and support are greatly appreciated.</p>
+    <!-- Sponsor Message and Right Column -->
+    <div class="container">
+      <div class="row">
+        <!-- Sponsor Message (twice as wide on md and above) -->
+        <div class="col-md-8">
+          <article id="main-message">
+            <h2>Support Our Community</h2>
+            <p>
+              Our group thrives on the support of members like you. We have
+              ongoing expenses and your contributions can make a significant
+              difference. If you would like recognition for your contribution,
+              please send an email to
+              <a href="mailto:womencodersio@gmail.com"
+                >womencodersio@gmail.com</a
+              >.
+            </p>
+            <p>
+              We are still working out the details, and your patience and
+              support are greatly appreciated.
+            </p>
 
-          
+            <script async src="https://js.stripe.com/v3/buy-button.js"></script>
 
-          <script async src="https://js.stripe.com/v3/buy-button.js">
-          </script>
+            <stripe-buy-button
+              buy-button-id="buy_btn_1PH9SOI6DApnhHR9DobJB184"
+              publishable-key="pk_live_51Oi5eOI6DApnhHR905yoQkkGcnxv3KRdIHBSHnWWLnayTH9leruDfQRqVkze1maWLz7aDUQMW40TsebgxM1MQpAS00hWZS8akN"
+            >
+            </stripe-buy-button>
 
-          <stripe-buy-button buy-button-id="buy_btn_1PH9SOI6DApnhHR9DobJB184"
-            publishable-key="pk_live_51Oi5eOI6DApnhHR905yoQkkGcnxv3KRdIHBSHnWWLnayTH9leruDfQRqVkze1maWLz7aDUQMW40TsebgxM1MQpAS00hWZS8akN">
-          </stripe-buy-button>
+            <!-- Expenses -->
+            <br />
+            <br />
+            <h3>Ongoing Expenses</h3>
+            <table id="expenses-table">
+              <thead>
+                <tr>
+                  <th>Expense</th>
+                  <th>Cost</th>
+                  <th>Image</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+              <tfoot>
+                <tr>
+                  <td>Total</td>
+                  <td id="total-cost">$0.00</td>
+                  <td></td>
+                </tr>
+              </tfoot>
+            </table>
+            <hr />
+            <br />
+            <h3>Single Expenses</h3>
+            <p>Details coming soon.</p>
+            <hr />
+            <br />
+            <h3>Our Sponsors</h3>
+            <!-- <p>A big thank you to our sponsors for their generous support!</p> -->
+            <table id="sponsors-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Amount</th>
+                  <th>Note</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+              <tfoot>
+                <!-- <tr>
+                  <td>Total</td>
+                  <td id="total-amount">$0.00</td>
+                  <td></td>
+                </tr> -->
+              </tfoot>
+            </table>
+            <hr />
+            <br />
+          </article>
+        </div>
 
-          <h3>Our Sponsors</h3>
-          <!-- <p>A big thank you to our sponsors for their generous support!</p> -->
-          <div class="sponsor">
-            <p>🚧<em> Coming soon?! could it be you? </em>🚧</p>
-          </div>
-
-      <!-- Expenses -->
-      <h3>Ongoing Expenses</h3>
-      <table id="expenses-table">
-        <thead>
-          <tr>
-            <th>Expense</th>
-            <th>Cost</th>
-            <th>Image</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td>Total</td>
-            <td id="total-cost">$0.00</td>
-            <td></td>
-          </tr>
-        </tfoot>
-      </table>
-      <hr>
-      <br>
-      <h3>Single Expenses</h3>
-      <p>Details coming soon.</p>
-        
-      </div>
-
-      <!-- Right Column -->
-      <div class="col-md-4">
-        <div id="right-column">
-          <!-- <button type="button" class="btn btn-primary">Get Swag</button> -->
-          <div id="upcoming-meetups">
-            <h3>Upcoming Meetups</h3>
-            <div id="event-tiles"></div>
+        <!-- Right Column -->
+        <div class="col-md-4">
+          <div id="right-column">
+            <!-- <button type="button" class="btn btn-primary">Get Swag</button> -->
+            <div id="upcoming-meetups">
+              <h3>Upcoming Meetups</h3>
+              <div id="event-tiles"></div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- Footer -->
-  <footer class="footer mt-auto py-3">
-    <div class="container">
-      <!-- Social Media Links -->
-      <div id="social-media-links">
-        <ul class="list-unstyled d-flex justify-content-center">
-          <li class="me-3">
-            <a href="https://www.meetup.com/women-coders-inclusive-organization/" target="_blank"><i
-                class="fa-brands fa-meetup fa-3x" style="color: #0797b1"></i></a>
-          </li>
-          <li class="me-3">
-            <a href="https://www.linkedin.com/company/women-coders-san-diego/" target="_blank"><i
-                class="fa-brands fa-linkedin-in fa-3x" style="color: #0797b1"></i></a>
-          </li>
-          <li class="me-3">
-            <a href="mailto: womencodersio@gmail.com" target="_blank"
-              ><i
-                class="fa-solid fa-envelope fa-3x"
-                style="color: #0797b1"
-              ></i
-            ></a>
-          </li>
-          <!-- <li>
+    <!-- Footer -->
+    <footer class="footer mt-auto py-3">
+      <div class="container">
+        <!-- Social Media Links -->
+        <div id="social-media-links">
+          <ul class="list-unstyled d-flex justify-content-center">
+            <li class="me-3">
+              <a
+                href="https://www.meetup.com/women-coders-inclusive-organization/"
+                target="_blank"
+                ><i class="fa-brands fa-meetup fa-3x" style="color: #0797b1"></i
+              ></a>
+            </li>
+            <li class="me-3">
+              <a
+                href="https://www.linkedin.com/company/women-coders-san-diego/"
+                target="_blank"
+                ><i
+                  class="fa-brands fa-linkedin-in fa-3x"
+                  style="color: #0797b1"
+                ></i
+              ></a>
+            </li>
+            <li class="me-3">
+              <a href="mailto: womencodersio@gmail.com" target="_blank"
+                ><i
+                  class="fa-solid fa-envelope fa-3x"
+                  style="color: #0797b1"
+                ></i
+              ></a>
+            </li>
+            <!-- <li>
                 <a href="#"><i class="fa-brands fa-slack-hash fa-2x"></i></a>
               </li> -->
-        </ul>
-        <p class="text-center mb-0">
-          © 2024 Women Coders Inclusive Org - San Diego. All Rights Reserved.
-        </p>
+          </ul>
+          <p class="text-center mb-0">
+            © 2024 Women Coders Inclusive Org - San Diego. All Rights Reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <div id="myModal" class="modal">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div class="modal-content">
+        <img id="modal-img" />
       </div>
     </div>
-  </footer>
-  <div id="myModal" class="modal">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <div class="modal-content">
-      <img id="modal-img">
-    </div>
-  </div>
-  <!-- For larger image in table -->
-  <script>
-    function enlargeImage(img) {
-      var modal = document.getElementById("myModal");
-      var modalImg = document.getElementById("modal-img");
-      modal.style.display = "block";
-      modalImg.src = img.src;
-    }
 
-    function closeModal() {
-      var modal = document.getElementById("myModal");
-      modal.style.display = "none";
-    }
-  </script>
-  <!-- Generate expenses table -->
-  <script>
-    async function loadYAML() {
-      const response = await fetch('./sponsors/expenses/expenses_recurring.yaml');
-      const yamlText = await response.text();
-      const data = jsyaml.load(yamlText);
-      return data;
-    }
-
-    function generateTable(data) {
-      const tableBody = document.querySelector('#expenses-table tbody');
-      let totalCost = 0;
-
-      data.expenses.forEach(expense => {
-        const row = document.createElement('tr');
-
-        const nameCell = document.createElement('td');
-        nameCell.textContent = expense.name;
-
-        const costCell = document.createElement('td');
-        costCell.textContent = `$${expense.cost.toFixed(2)}`;
-
-        const imageCell = document.createElement('td');
-        const image = document.createElement('img');
-        image.src = expense.image;
-        image.alt = `${expense.name} Expense Image`;
-        image.setAttribute('onclick', 'enlargeImage(this)');
-        imageCell.appendChild(image);
-
-        row.appendChild(nameCell);
-        row.appendChild(costCell);
-        row.appendChild(imageCell);
-
-        tableBody.appendChild(row);
-
-        totalCost += expense.cost;
-      });
-
-      document.getElementById('total-cost').textContent = `$${totalCost.toFixed(2)}`;
-    }
-
-    function enlargeImage(img) {
-      const src = img.src;
-      const imgWindow = window.open(src, '_blank');
-      imgWindow.focus();
-    }
-
-    document.addEventListener('DOMContentLoaded', async () => {
-      const data = await loadYAML();
-      generateTable(data);
-    });
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
-
-  <script type="module">
-    import jsyaml from 'https://cdn.skypack.dev/js-yaml';
-
-    document.addEventListener('DOMContentLoaded', function () {
-      async function fetchEventData() {
-        const eventData = [];
-        // Loop through possible event filenames
-        for (let i = 1; i <= 2; i++) {
-          try {
-            const yamlResponse = await fetch(
-              `/upcoming_meetups/event_${i}.yaml`
-            );
-            const yamlData = await yamlResponse.text();
-            const eventDataPart = jsyaml.load(yamlData);
-            if (eventDataPart) {
-              eventData.push(...eventDataPart);
-            }
-          } catch (error) {
-            console.error(`Error fetching event_${i}.yaml:`, error);
-          }
-        }
-        return eventData;
+    <!-- Generate sponsors table -->
+    <script>
+      async function loadSponsorsYAML() {
+        const response = await fetch('/sponsors/sponsors_2025.yaml');
+        const yamlText = await response.text();
+        const data = jsyaml.load(yamlText);
+        return data;
       }
 
-      function createEventTiles(eventData) {
-        let tilesHTML = '';
-        eventData.forEach((event) => {
-          if (
-            event &&
-            event.title &&
-            event.date &&
-            event.time &&
-            event.address &&
-            event.link
-          ) {
-            const { image, title, date, time, address, link } = event;
+      function generateSponsorsTable(data) {
+        const tableBody = document.querySelector('#sponsors-table tbody');
+        let totalAmount = 0;
 
-            const tileHTML = `
+        data.sponsors.forEach((sponsor) => {
+          const row = document.createElement('tr');
+
+          const nameCell = document.createElement('td');
+          nameCell.textContent = sponsor.name;
+
+          const amountCell = document.createElement('td');
+          amountCell.textContent = `$${sponsor.amount.toFixed(2)}`;
+
+          const noteCell = document.createElement('td');
+          noteCell.textContent = sponsor.note;
+
+          row.appendChild(nameCell);
+          row.appendChild(amountCell);
+          row.appendChild(noteCell);
+
+          tableBody.appendChild(row);
+
+          totalAmount += sponsor.amount;
+        });
+
+        document.getElementById(
+          'total-amount'
+        ).textContent = `$${totalAmount.toFixed(2)}`;
+      }
+
+      document.addEventListener('DOMContentLoaded', async () => {
+        try {
+          const sponsorsData = await loadSponsorsYAML();
+          generateSponsorsTable(sponsorsData);
+
+          const expensesData = await loadExpensesYAML();
+          generateExpensesTable(expensesData);
+        } catch (error) {
+          console.error('Error loading data:', error);
+        }
+      });
+    </script>
+
+    <!-- For larger image in table -->
+    <script>
+      function enlargeImage(img) {
+        var modal = document.getElementById('myModal');
+        var modalImg = document.getElementById('modal-img');
+        modal.style.display = 'block';
+        modalImg.src = img.src;
+      }
+
+      function closeModal() {
+        var modal = document.getElementById('myModal');
+        modal.style.display = 'none';
+      }
+    </script>
+
+    <!-- Generate expenses table -->
+    <script>
+      async function loadExpensesYAML() {
+        const response = await fetch(
+          './sponsors/expenses/expenses_recurring.yaml'
+        );
+        const yamlText = await response.text();
+        const data = jsyaml.load(yamlText);
+        return data;
+      }
+
+      function generateTable(data) {
+        const tableBody = document.querySelector('#expenses-table tbody');
+        let totalCost = 0;
+
+        data.expenses.forEach((expense) => {
+          const row = document.createElement('tr');
+
+          const nameCell = document.createElement('td');
+          nameCell.textContent = expense.name;
+
+          const costCell = document.createElement('td');
+          costCell.textContent = `$${expense.cost.toFixed(2)}`;
+
+          const imageCell = document.createElement('td');
+          const image = document.createElement('img');
+          image.src = expense.image;
+          image.alt = `${expense.name} Expense Image`;
+          image.setAttribute('onclick', 'enlargeImage(this)');
+          imageCell.appendChild(image);
+
+          row.appendChild(nameCell);
+          row.appendChild(costCell);
+          row.appendChild(imageCell);
+
+          tableBody.appendChild(row);
+
+          totalCost += expense.cost;
+        });
+
+        document.getElementById(
+          'total-cost'
+        ).textContent = `$${totalCost.toFixed(2)}`;
+      }
+
+      function enlargeImage(img) {
+        const src = img.src;
+        const imgWindow = window.open(src, '_blank');
+        imgWindow.focus();
+      }
+
+      document.addEventListener('DOMContentLoaded', async () => {
+        const data = await loadExpensesYAML();
+        generateTable(data);
+      });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+
+    <script type="module">
+      import jsyaml from 'https://cdn.skypack.dev/js-yaml';
+
+      document.addEventListener('DOMContentLoaded', function () {
+        async function fetchEventData() {
+          const eventData = [];
+          // Loop through possible event filenames
+          for (let i = 1; i <= 1; i++) {
+            try {
+              const yamlResponse = await fetch(
+                `/upcoming_meetups/event_${i}.yaml`
+              );
+              const yamlData = await yamlResponse.text();
+              const eventDataPart = jsyaml.load(yamlData);
+              if (eventDataPart) {
+                eventData.push(...eventDataPart);
+              }
+            } catch (error) {
+              console.error(`Error fetching event_${i}.yaml:`, error);
+            }
+          }
+          return eventData;
+        }
+
+        function createEventTiles(eventData) {
+          let tilesHTML = '';
+          eventData.forEach((event) => {
+            if (
+              event &&
+              event.title &&
+              event.date &&
+              event.time &&
+              event.address &&
+              event.link
+            ) {
+              const { image, title, date, time, address, link } = event;
+
+              const tileHTML = `
               <a href="${link}" target="_blank" class="">  
                 <div class="event-tile">
                     <div class="event-card">
@@ -365,8 +485,8 @@
                         image ||
                         'https://www.svgrepo.com/show/508699/landscape-placeholder.svg'
                       }" class="event-card-img" alt="${
-              title || 'Event'
-            } Image"/>
+                title || 'Event'
+              } Image"/>
                       <div class="event-card-body">
                         <h5 class="event-card-title">${
                           title || 'Untitled Event'
@@ -377,27 +497,31 @@
                   </div>
                 </a>
               `;
-            tilesHTML += tileHTML;
-          }
-        });
-        return tilesHTML;
-      }
+              tilesHTML += tileHTML;
+            }
+          });
+          return tilesHTML;
+        }
 
-      async function insertEventTiles() {
-        const eventTilesContainer = document.getElementById('event-tiles');
-        const eventData = await fetchEventData();
-        const tilesHTML = createEventTiles(eventData);
-        eventTilesContainer.innerHTML = tilesHTML;
-      }
+        async function insertEventTiles() {
+          const eventTilesContainer = document.getElementById('event-tiles');
+          const eventData = await fetchEventData();
+          const tilesHTML = createEventTiles(eventData);
+          eventTilesContainer.innerHTML = tilesHTML;
+        }
 
-      insertEventTiles();
-    });
-  </script>
+        insertEventTiles();
+      });
+    </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-  <script src="https://kit.fontawesome.com/494bbb1676.js" crossorigin="anonymous"></script>
-</body>
-
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/494bbb1676.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
