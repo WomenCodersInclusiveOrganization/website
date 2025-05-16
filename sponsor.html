@@ -382,6 +382,10 @@
 
       function generateTable(data) {
         const tableBody = document.querySelector('#expenses-table tbody');
+        if (!tableBody) {
+          console.error("Expenses table body not found.");
+          return;
+        }
         let totalCost = 0;
 
         data.expenses.forEach((expense) => {
@@ -396,7 +400,7 @@
           const imageCell = document.createElement('td');
           if (expense.image) {
             const image = document.createElement('img');
-            image.src = expense.image;
+            image.src = `/sponsors/2024/expenses/${expense.image}`;
             image.alt = `${expense.name} Expense Image`;
             image.setAttribute('onclick', 'enlargeImage(this)');
             imageCell.appendChild(image);
@@ -607,7 +611,7 @@
           const imageCell = document.createElement('td');
           if (expense.image) {
             const image = document.createElement('img');
-            image.src = expense.image;
+            image.src = `/sponsors/2024/expenses/${expense.image}`;
             image.alt = `${expense.name} Expense Image`;
             image.style.height = '100px';
             image.style.cursor = 'pointer';
