@@ -99,6 +99,10 @@
         text-decoration: none;
         cursor: pointer;
       }
+
+      #year-tables > section {
+        margin: 2rem 0;
+      }
     </style>
     <!-- TODO JS file? or here? -->
     <script>
@@ -202,55 +206,7 @@
               publishable-key="pk_live_51Oi5eOI6DApnhHR905yoQkkGcnxv3KRdIHBSHnWWLnayTH9leruDfQRqVkze1maWLz7aDUQMW40TsebgxM1MQpAS00hWZS8akN"
             >
             </stripe-buy-button>
-
-            <!-- Expenses -->
-            <br />
-            <br />
-            <h3>Ongoing Expenses</h3>
-            <table id="expenses-table">
-              <thead>
-                <tr>
-                  <th>Expense</th>
-                  <th>Cost</th>
-                  <th>Image</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-              <tfoot>
-                <tr>
-                  <td>Total</td>
-                  <td id="total-cost">$0.00</td>
-                  <td></td>
-                </tr>
-              </tfoot>
-            </table>
-            <hr />
-            <br />
-            <h3>Single Expenses</h3>
-            <p>Details coming soon.</p>
-            <hr />
-            <br />
-            <h3>Our Sponsors</h3>
-            <!-- <p>A big thank you to our sponsors for their generous support!</p> -->
-            <table id="sponsors-table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Amount</th>
-                  <th>Note</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-              <tfoot>
-                <!-- <tr>
-                  <td>Total</td>
-                  <td id="total-amount">$0.00</td>
-                  <td></td>
-                </tr> -->
-              </tfoot>
-            </table>
-            <hr />
-            <br />
+            <div id="year-tables"></div>
           </article>
         </div>
 
@@ -314,10 +270,34 @@
       </div>
     </div>
 
+    <!-- <table id="sponsors-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Amount</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <table id="expenses-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Cost</th>
+          <th>Image</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div id="total-cost"></div> -->
+
     <!-- Generate sponsors table -->
     <script>
       async function loadSponsorsYAML() {
-        const response = await fetch('/sponsors/sponsors_2025.yaml');
+        const response = await fetch('/sponsors/2025/sponsors.yaml');
         const yamlText = await response.text();
         const data = jsyaml.load(yamlText);
         return data;
@@ -325,6 +305,11 @@
 
       function generateSponsorsTable(data) {
         const tableBody = document.querySelector('#sponsors-table tbody');
+        if (!tableBody) {
+          console.error("Sponsors table body not found.");
+          return;
+        }
+
         let totalAmount = 0;
 
         data.sponsors.forEach((sponsor) => {
@@ -348,9 +333,12 @@
           totalAmount += sponsor.amount;
         });
 
-        document.getElementById(
-          'total-amount'
-        ).textContent = `$${totalAmount.toFixed(2)}`;
+        const totalAmountElement = document.getElementById('total-amount');
+        if (totalAmountElement) {
+          totalAmountElement.textContent = `$${totalAmount.toFixed(2)}`;
+        } else {
+          console.error("Total amount element not found.");
+        }
       }
 
       document.addEventListener('DOMContentLoaded', async () => {
@@ -385,7 +373,7 @@
     <script>
       async function loadExpensesYAML() {
         const response = await fetch(
-          './sponsors/expenses/expenses_recurring.yaml'
+          './sponsors/2025/expenses/expenses.yaml'
         );
         const yamlText = await response.text();
         const data = jsyaml.load(yamlText);
@@ -406,11 +394,13 @@
           costCell.textContent = `$${expense.cost.toFixed(2)}`;
 
           const imageCell = document.createElement('td');
-          const image = document.createElement('img');
-          image.src = expense.image;
-          image.alt = `${expense.name} Expense Image`;
-          image.setAttribute('onclick', 'enlargeImage(this)');
-          imageCell.appendChild(image);
+          if (expense.image) {
+            const image = document.createElement('img');
+            image.src = expense.image;
+            image.alt = `${expense.name} Expense Image`;
+            image.setAttribute('onclick', 'enlargeImage(this)');
+            imageCell.appendChild(image);
+          }
 
           row.appendChild(nameCell);
           row.appendChild(costCell);
@@ -430,6 +420,10 @@
         const src = img.src;
         const imgWindow = window.open(src, '_blank');
         imgWindow.focus();
+      }
+
+      function generateExpensesTable(data) {
+        generateTable(data);
       }
 
       document.addEventListener('DOMContentLoaded', async () => {
@@ -511,6 +505,145 @@
         }
 
         insertEventTiles();
+      });
+    </script>
+
+    <script>
+      async function loadYearData(year) {
+        try {
+          const sponsorsResponse = await fetch(`/sponsors/${year}/sponsors.yaml`);
+          const expensesResponse = await fetch(`/sponsors/${year}/expenses/expenses.yaml`);
+
+          if (!sponsorsResponse.ok || !expensesResponse.ok) {
+            throw new Error(`HTTP error! status: ${sponsorsResponse.status} or ${expensesResponse.status}`);
+          }
+
+          const sponsorsYAML = await sponsorsResponse.text();
+          const expensesYAML = await expensesResponse.text();
+
+          const sponsorsData = jsyaml.load(sponsorsYAML);
+          const expensesData = jsyaml.load(expensesYAML);
+
+          return { sponsors: sponsorsData.sponsors || [], expenses: expensesData.expenses || [] };
+        } catch (error) {
+          console.error(`Error loading data for year ${year}:`, error);
+          return { sponsors: [], expenses: [] };
+        }
+      }
+
+      function generateYearTable(year, data) {
+        const container = document.getElementById('main-message'); // Correct container
+        let yearTablesWrapper = document.getElementById('year-tables');
+
+        if (!yearTablesWrapper) {
+          yearTablesWrapper = document.createElement('div');
+          yearTablesWrapper.id = 'year-tables';
+          yearTablesWrapper.style.maxWidth = '100%';
+          container.appendChild(yearTablesWrapper);
+        }
+
+        const yearSection = document.createElement('section');
+        yearSection.innerHTML = `<h3>${year}</h3>`;
+
+        const table = document.createElement('table');
+        table.classList.add('year-table');
+        table.innerHTML = `
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Amount</th>
+              <th>Image</th>
+              <th>Note</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3">Net Total</td>
+              <td id="net-total-${year}">$0.00</td>
+            </tr>
+          </tfoot>
+        `;
+
+        const tbody = table.querySelector('tbody');
+        let totalSponsors = 0;
+        let totalExpenses = 0;
+
+        data.sponsors.forEach((sponsor) => {
+          const row = document.createElement('tr');
+
+          const nameCell = document.createElement('td');
+          nameCell.textContent = sponsor.name;
+
+          const amountCell = document.createElement('td');
+          amountCell.textContent = `$${parseFloat(sponsor.amount).toFixed(2)}`;
+
+          const imageCell = document.createElement('td');
+          imageCell.textContent = ''; // No image for sponsors
+
+          const noteCell = document.createElement('td');
+          noteCell.textContent = sponsor.note || '';
+
+          row.appendChild(nameCell);
+          row.appendChild(amountCell);
+          row.appendChild(imageCell);
+          row.appendChild(noteCell);
+
+          tbody.appendChild(row);
+
+          totalSponsors += parseFloat(sponsor.amount);
+        });
+
+        data.expenses.forEach((expense) => {
+          const row = document.createElement('tr');
+          row.style.height = '100px'; // Set row height to accommodate images
+
+          const expenseNameCell = document.createElement('td');
+          expenseNameCell.textContent = expense.name;
+
+          const amountCell = document.createElement('td');
+          amountCell.textContent = `-$${parseFloat(expense.cost).toFixed(2)}`;
+
+          const imageCell = document.createElement('td');
+          if (expense.image) {
+            const image = document.createElement('img');
+            image.src = expense.image;
+            image.alt = `${expense.name} Expense Image`;
+            image.style.height = '100px';
+            image.style.cursor = 'pointer';
+            image.addEventListener('click', () => {
+              window.open(expense.image, '_blank');
+            });
+            imageCell.appendChild(image);
+          }
+
+          const noteCell = document.createElement('td');
+          noteCell.textContent = '';
+
+          row.appendChild(expenseNameCell);
+          row.appendChild(amountCell);
+          row.appendChild(imageCell);
+          row.appendChild(noteCell);
+
+          tbody.appendChild(row);
+
+          totalExpenses += parseFloat(expense.cost);
+        });
+
+        const netTotal = totalSponsors - totalExpenses;
+        table.querySelector(`#net-total-${year}`).textContent = `$${netTotal.toFixed(2)}`;
+
+        yearSection.appendChild(table);
+        yearTablesWrapper.appendChild(yearSection);
+      }
+
+      document.addEventListener('DOMContentLoaded', async () => {
+        const years = (await fetch('/sponsors/years.json').then((res) => res.json())).sort((a, b) => b - a);
+
+        for (const year of years) {
+          const data = await loadYearData(year);
+          generateYearTable(year, data);
+        }
       });
     </script>
 

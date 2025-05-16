@@ -1,0 +1,23 @@
+expenses:
+  - name: "Meetup - Yearly"
+    cost: 146.91
+    image: "./sponsors/expenses/2024/2024_Meetup.png"
+  - name: "Zoom - Monthly"
+    cost: 203.40
+    image: "./sponsors/expenses/2024/2024_Zoom_Monthly.png"
+  - name: "Namecheap - Yearly"
+    cost: 19.34
+    image: "./sponsors/expenses/2024/2024_Namecheap.png"
+  - name: "Banner Pulleys"
+    cost: 22.00
+    image: ""
+  - name: "Banner"
+    cost: 38.79
+    image: ""
+  - name: "Stickers"
+    cost: 30.72
+    image: ""
+  - name: "Tablecloth"
+    cost: 5.16
+    image: ""
+

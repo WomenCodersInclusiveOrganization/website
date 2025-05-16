@@ -1,0 +1,11 @@
+expenses:
+  - name: 'Meetup Annual Subscription'
+    cost: 199.99
+    image: ''
+    description: 'Meetup Annual Subscription'
+    reimbursed: false
+  - name: 'Zooom Workplace Pro Annual'
+    cost: 169.49
+    image: ''
+    description: 'Zooom Workplace Pro Annual'
+    reimbursed: false

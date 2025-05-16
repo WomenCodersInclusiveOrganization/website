@@ -535,3 +535,9 @@ p a {
 .event-page-link:hover {
   text-decoration: underline;
 }
+
+/* Year Tables */
+
+#year-tables > section {
+  margin: 2rem 0;
+}
