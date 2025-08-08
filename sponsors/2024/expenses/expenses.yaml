@@ -1,0 +1,10 @@
+expenses:
+  - name: "Meetup - Yearly"
+    cost: 146.91
+    image: "2024_Meetup.png"
+  - name: "Zoom - Monthly"
+    cost: 203.40
+    image: "2024_Zoom_Monthly.png"
+  - name: "Namecheap - Yearly"
+    cost: 19.34
+    image: "2024_Namecheap.png"
