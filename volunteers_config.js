@@ -2,6 +2,7 @@ const folderNames = [
   'tahnee_joyce_mccoy',
   'carly_kennedy',
   'carmen_villalobos',
+  'cherry_song',
   'sasha_garcia',
   'julie_knowles',
   'kelly_gaines',
