@@ -4,7 +4,6 @@ const folderNames = [
   'carmen_villalobos',
   'cherry_song',
   'sasha_garcia',
-  'julie_knowles',
   'kelly_gaines',
   'erica_gates',
   'jenni_preciado',
